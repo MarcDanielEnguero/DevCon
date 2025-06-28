@@ -424,10 +424,11 @@ h1, h2, h3 {
   margin: 0 auto;
   display: flex;
   flex-wrap: wrap;
-  align-items: center;
-  justify-content: space-between;
-  gap: 40px;
+  align-items: flex-start;       /* aligns items by top edge ✅ */
+  justify-content: center;       /* centers everything horizontally ✅ */
+  gap: 24px;                     /* small space between image and text */
 }
+
 
 .ai-left-image {
   flex: 1;
@@ -447,36 +448,44 @@ h1, h2, h3 {
 
 .ai-right-text {
   flex: 1;
-  min-width: 260px;
-  color: white;
   max-width: 460px;
+  min-width: 260px;
+  padding-left: 0;               /* remove unnecessary left padding */
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;   /* align top of content with image ✅ */
 }
+
 
 .ai-right-text h3 {
   color: #FFD700;
-  font-size: 22px;
+  font-size: 28px;     /* was 22px */
   font-weight: bold;
-  margin-bottom: 20px;
+  margin-bottom: 16px;
 }
 
 .ai-right-text p {
-  font-size: 17px;
-  line-height: 1.6;
-  margin-bottom: 30px;
+  font-size: 18.5px;    /* was 17px */
+  line-height: 1.7;
+  margin-bottom: 28px;
 }
 
+
 .ai-btn {
+  align-self: flex-start; /* keeps it aligned to the left of text block */
   display: inline-block;
   background-color: #FFD700;
   color: #1c1c1c;
   font-weight: bold;
-  font-size: 14px;
-  padding: 12px 24px;
+  font-size: 15px;
+  padding: 14px 28px;
   border-radius: 999px;
   text-decoration: none;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
   transition: background 0.3s ease;
+  white-space: nowrap; /* prevents it from stretching or wrapping weirdly */
 }
+
 
 .ai-btn span {
   margin-left: 8px;
@@ -535,40 +544,174 @@ h1, h2, h3 {
 }
 
 /* ===== Vibe Section ===== */
-.vibe {
-  background: #1a1a1a;
-  padding: 80px 0;
+/* ===== Vibe Section ===== */
+.devcon-vibe-stacked {
+  background-color: rgba(28, 28, 28, 0.6); /* #1C1C1C99 */
+  padding: 60px 20px;
+  color: #fff;
+  max-width: 1400px;
+  margin: auto;
 }
 
-.vibe h2 {
+.vibe-title {
   text-align: center;
-  color: #ffcc00;
+  color: orange;
+  font-size: 2.5rem;
   margin-bottom: 40px;
 }
 
-.testimonial-slider {
+.vibe-carousel-wrapper {
   display: flex;
-  flex-direction: row;
-  gap: 30px;
+  flex-direction: column;
+  gap: 40px;
+  position: relative;
+}
+
+.vibe-set {
+  display: none;
+  flex-direction: column;
+  gap: 40px;
+}
+
+.vibe-set.active {
+  display: flex;
+}
+
+.vibe-card-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
   justify-content: center;
-  flex-wrap: wrap;
+  margin-bottom: 40px;
 }
 
-.testimonial-slider .slide {
-  background: #222;
-  padding: 30px;
-  border-radius: 12px;
-  max-width: 300px;
-  text-align: center;
-  color: #ddd;
+.vibe-card-carousel {
+  position: relative;
+  width: 100%;
+  max-width: 1200px;
 }
 
-.testimonial-slider img {
+.vibe-card {
+  display: flex;
+  background: linear-gradient(27deg, #1C1C1C 0%, #1C1C1C 13.76%, #393939 47.41%, #696969 86.54%, #828282 100%);
+  border-radius: 10px;
+  overflow: hidden;
+  min-height: 420px;
+  width: 100%;
+}
+
+.vibe-image {
+  width: 45%;
+  height: 100%;
+}
+
+.vibe-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.vibe-content {
+  width: 55%;
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.vibe-label {
+  color: orange;
+  font-size: 0.9rem;
+  margin-bottom: 10px;
+  text-transform: uppercase;
+}
+
+.vibe-heading {
+  font-size: 1.8rem;
+  margin-bottom: 20px;
+  font-weight: bold;
+}
+
+.vibe-text {
+  font-size: 1rem;
+  margin-bottom: 30px;
+  color: #ccc;
+}
+
+.vibe-btn {
+  padding: 12px 24px;
+  border: 2px solid #ffcc00;
+  color: #ffcc00;
+  text-decoration: none;
+  border-radius: 5px;
+  width: fit-content;
+  transition: all 0.3s ease;
+  font-weight: 600;
+}
+
+.vibe-btn:hover {
+  background: #ffcc00;
+  color: #1c1c1c;
+}
+
+.vibe-card-next,
+.vibe-card-prev {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(255, 255, 255, 0.15);
+  border: none;
   border-radius: 50%;
-  width: 80px;
-  height: 80px;
-  margin: 0 auto 20px;
+  padding: 12px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+  z-index: 10;
+  font-size: 1.2rem;
+  color: white;
 }
+
+.vibe-card-next:hover,
+.vibe-card-prev:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.vibe-card-prev {
+  left: 20px; /* moved closer */
+}
+
+.vibe-card-next {
+  right: 20px; /* moved closer */
+}
+
+@media (max-width: 768px) {
+  .vibe-card {
+    flex-direction: column;
+    height: auto;
+  }
+
+  .vibe-image,
+  .vibe-content {
+    width: 100%;
+  }
+
+  .vibe-image img {
+    height: auto;
+  }
+
+  .vibe-card-prev {
+    left: 10px;
+  }
+
+  .vibe-card-next {
+    right: 10px;
+  }
+}
+
+
+
+
+
 
 /* ===== CTA Tiles ===== */
 .cta-tiles {

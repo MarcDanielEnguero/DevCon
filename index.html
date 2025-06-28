@@ -6,6 +6,24 @@
   <title>Devcon Homepage</title>
   <link rel="stylesheet" href="style.css">
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const nextButtons = document.querySelectorAll('.vibe-card-next');
+
+    nextButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        const carouselId = button.getAttribute('data-target');
+        const carousel = document.querySelector(`.single-carousel[data-carousel="${carouselId}"]`);
+        const sets = carousel.querySelectorAll('.vibe-set');
+        const current = Array.from(sets).findIndex(set => set.classList.contains('active'));
+
+        sets[current].classList.remove('active');
+        const nextIndex = (current + 1) % sets.length;
+        sets[nextIndex].classList.add('active');
+      });
+    });
+  });
+</script>
 </head>
 <body>
 
@@ -186,22 +204,82 @@
 
 
 
-  <!-- Vibe Section -->
-  <section class="vibe">
-    <div class="container">
-      <h2>The DEVCON Vibe</h2>
-      <div class="testimonial-slider">
-        <div class="slide">
-          <img src="assets/images/speaker1.jpg" alt="Speaker 1">
-          <p>“Why did I volunteer? Because DEVCON made learning fun and community-driven.”</p>
+<section class="devcon-vibe-stacked">
+  <h2 class="vibe-title">The DEVCON Vibe</h2>
+
+  <!-- Card 1 -->
+  <div class="vibe-card-wrapper">
+    <button class="vibe-card-prev" data-target="1">←</button>
+    <div class="vibe-card-carousel single-carousel" data-carousel="1">
+      <div class="vibe-set active">
+        <div class="vibe-card">
+          <div class="vibe-image">
+            <img src="assets/images/wd.jpg" alt="WD Damarillo" />
+          </div>
+          <div class="vibe-content">
+            <p class="vibe-label">DEVCON TV News</p>
+            <h3 class="vibe-heading">Why did Winston start DEVCON Philippines</h3>
+            <p class="vibe-text">Meet Winston “WD” Damarillo, the founder and president of DEVCON Philippines...</p>
+            <a href="#" class="vibe-btn">Meet Our Founder</a>
+          </div>
         </div>
-        <div class="slide">
-          <img src="assets/images/speaker2.jpg" alt="Speaker 2">
-          <p>“Being part of DEVCON helped me grow my tech career and meet lifelong friends.”</p>
+      </div>
+      <div class="vibe-set">
+        <div class="vibe-card">
+          <div class="vibe-image">
+            <img src="assets/images/placeholder1.jpg" alt="Alt card 1" />
+          </div>
+          <div class="vibe-content">
+            <p class="vibe-label">Flashback</p>
+            <h3 class="vibe-heading">The Early DEVCON Days</h3>
+            <p class="vibe-text">From humble meetups to massive summits. How it all began.</p>
+            <a href="#" class="vibe-btn">See Our History</a>
+          </div>
         </div>
       </div>
     </div>
-  </section>
+    <button class="vibe-card-next" data-target="1">→</button>
+  </div>
+
+  <!-- Card 2 -->
+  <div class="vibe-card-wrapper">
+    <button class="vibe-card-prev" data-target="1">←</button>
+    <div class="vibe-card-carousel single-carousel" data-carousel="2">
+      <div class="vibe-set active">
+        <div class="vibe-card">
+          <div class="vibe-content">
+            <p class="vibe-label">Chapters Showcase</p>
+            <h3 class="vibe-heading">DEVCON Visayas</h3>
+            <p class="vibe-text">Join DEVCON Visayas Tech events in Iloilo, Bacolod, and Cebu...</p>
+            <a href="#" class="vibe-btn">Join Visayas Community</a>
+          </div>
+          <div class="vibe-image">
+            <img src="assets/images/visayas.jpg" alt="DEVCON Visayas" />
+          </div>
+        </div>
+      </div>
+      <div class="vibe-set">
+        <div class="vibe-card">
+          <div class="vibe-content">
+            <p class="vibe-label">Chapters Showcase</p>
+            <h3 class="vibe-heading">DEVCON Cebu</h3>
+            <p class="vibe-text">A rising dev force in the Queen City of the South!</p>
+            <a href="#" class="vibe-btn">Join Cebu Chapter</a>
+          </div>
+          <div class="vibe-image">
+            <img src="assets/images/placeholder2.jpg" alt="DEVCON Cebu" />
+          </div>
+        </div>
+      </div>
+    </div>
+    <button class="vibe-card-next" data-target="2">→</button>
+  </div>
+</section>
+
+
+
+
+
 
   <!-- Call to Action Tiles -->
   <section class="cta-tiles">
